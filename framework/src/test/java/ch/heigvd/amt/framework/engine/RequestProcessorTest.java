@@ -2,6 +2,10 @@ package ch.heigvd.amt.framework.engine;
 
 import ch.heigvd.amt.framework.exceptions.InvalidOperationException;
 import ch.heigvd.amt.framework.exceptions.InvalidRequestException;
+import ch.heigvd.amt.framework.services.CalculatorService;
+import ch.heigvd.amt.framework.services.ClockService;
+import ch.heigvd.amt.framework.services.HealthCheckService;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.regex.Matcher;
@@ -12,6 +16,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class RequestProcessorTest {
 
   RequestProcessor requestProcessor = new RequestProcessor();
+
+  @BeforeAll
+  static void registerServices() {
+    ServiceRegistry registry = ServiceRegistry.getServiceRegistry();
+    registry.register(HealthCheckService.SERVICE_NAME, new HealthCheckService());
+    registry.register(CalculatorService.SERVICE_NAME, new CalculatorService());
+    registry.register(ClockService.SERVICE_NAME, new ClockService());
+  }
 
   @Test
   void processClockServiceGetCurrentDateCommand() throws InvalidRequestException, InvalidOperationException {
@@ -70,4 +82,5 @@ class RequestProcessorTest {
     assertEquals(0,response.getStatusCode());
     assertNotEquals(0, Long.parseLong(response.getValue()));
   }
+
 }

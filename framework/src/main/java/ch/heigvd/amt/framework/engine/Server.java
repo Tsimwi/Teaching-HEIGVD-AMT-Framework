@@ -1,5 +1,9 @@
 package ch.heigvd.amt.framework.engine;
 
+import ch.heigvd.amt.framework.services.CalculatorService;
+import ch.heigvd.amt.framework.services.ClockService;
+import ch.heigvd.amt.framework.services.HealthCheckService;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -75,7 +79,7 @@ public class Server {
         out.write(Protocol.CRLF);
         out.flush();
       } catch (Exception e) {
-        out.write("INVALID REQUEST");
+        out.write("INVALID REQUEST " + e.getMessage());
         out.write(Protocol.CRLF);
         out.flush();
       }
@@ -91,6 +95,11 @@ public class Server {
   }
 
   public static void main(String[] args) {
+    ServiceRegistry registry = ServiceRegistry.getServiceRegistry();
+    registry.register(HealthCheckService.SERVICE_NAME, new HealthCheckService());
+    registry.register(ClockService.SERVICE_NAME, new ClockService());
+    registry.register(CalculatorService.SERVICE_NAME, new CalculatorService());
+
     Server server = new Server();
     server.start();
   }

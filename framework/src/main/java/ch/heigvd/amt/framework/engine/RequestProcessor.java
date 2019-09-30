@@ -1,6 +1,9 @@
 package ch.heigvd.amt.framework.engine;
 
+import ch.heigvd.amt.framework.api.IService;
 import ch.heigvd.amt.framework.exceptions.InvalidOperationException;
+import ch.heigvd.amt.framework.exceptions.LookupException;
+import ch.heigvd.amt.framework.services.HealthCheckService;
 
 /**
  * The RequestProcessor is responsible to process requests sent by clients to the server. In this initial
@@ -16,39 +19,16 @@ class RequestProcessor {
 
   void processRequest(Request request, Response response) throws InvalidOperationException {
 
-    // TODO: Not a big fan of using a switch statement, which is going to grow large as we add commands...
-    switch (request.getServiceName()) {
-      case "healthCheckService": // this is a "framework" service, so kind of OK
-        response.setStatusCode(0);
-        switch (request.getOperationName()) {
-          case "ping":
-            response.setValue("I am alive");
-            break;
-          case "uptime":
-            response.setValue(Long.toString(Server.getServer().getUptime()));
-            break;
-        }
-        break;
-      case "clockService": // is this a "framework" or "application" service...
-        response.setStatusCode(0);
-        response.setValue("2019-01-01");
-        break;
-      case "calculatorService": // TODO: this is definitely an "application" service and needs to be extracted!!
-        response.setStatusCode(0);
-        switch (request.getOperationName()) {
-          case "add":
-            Integer p1 = Integer.parseInt(request.getParameterValues().get(0));
-            Integer p2 = Integer.parseInt(request.getParameterValues().get(1));
-            response.setValue(Integer.toString(p1 + p2));
-            break;
-          case "mult":
-            p1 = Integer.parseInt(request.getParameterValues().get(0));
-            p2 = Integer.parseInt(request.getParameterValues().get(1));
-            response.setValue(Integer.toString(p1 * p2));
-            break;
-        }
-        break;
+    ServiceRegistry registry = ServiceRegistry.getServiceRegistry();
+    try {
+      IService service = registry.lookup(request.getServiceName());
+      String returnValue = service.execute(request.getOperationName(), request.getParameterValues());
+      response.setStatusCode(0);
+      response.setValue(returnValue);
+    } catch (LookupException e) {
+      throw new InvalidOperationException(e.getMessage());
     }
+
   }
 
 }
