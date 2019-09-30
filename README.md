@@ -1,5 +1,11 @@
 # Teaching-HEIGVD-AMT-Framework
-## A simple application-level protocol
+## Introduction
+
+This project was create to illustrate how an application server works "behind the scenes". We have tried to write as little code as possible to demonstrate a number of patterns and mechanisms. We have also done that in a step-by-step fashion, adding more features in every git branch.
+
+While application servers work do most of their work with HTTP requests, we have made the choice to specify our own application-level protocol. This protocol allows clients to connect to the server over TCP, and to send a series of one-line commands (every command contains the name of a service, the name of a commands and a list of optional parameters).
+
+## Specification of the AMT protocol
 
 * The server accepts connection requests on TCP port 2205.
 
@@ -46,9 +52,34 @@ C: calculatorService:add:12
 S: 4004:missing parameter
 ```
 
+## Design of the first implementation
+
+Let's start with a minimal implementation that meets these requirements. We have decided to use 4 key classes: Server, RequestProcessor, Request and Response. The responsibilities of these classes are described in the class diagram:
+
+![./doc/figure-class-diagram.png](./doc/figure-class-diagram.png)
 
 
-## Framework vs Application
 
-The first notion that we want to illustrate with this project is the **Inversion of Control (IoC) pattern**. When this pattern is applied, the developer is not invoking methods or functions provided by a **library**. Instead, the developer provides code that is invoked by a **framework**, when a certain event occurs.
+The interactions between these classes are shown in the sequence diagram. When the Server has accepted a connection request, it starts reading lines from the socket. For each line, it creates a Request and an (empty) Response. It passes them to the RequestProcessor. The RequestProcessor reads data in the Request object and writes data in the Response object. When the RequestProcessor is done, the Server serializes the Response and writes the bytes on the socket, sending them to the client.
+
+![./doc/figure-class-diagram.png](./doc/figure-sequence-diagram.png)
+
+## Critique of this version (step-01-only-a-framework)
+
+This version has a number of flaws:
+
+* The code is **not easy to extend**. If we define new commands, we have to modify the RequestProcessor. This class will quickly become long and hard to maintain when we add new commands.
+* We **do not have a clean separation** between the generic code (the classes that implement the core protocol) and the application-specific code (the commands that we add on top, such as the calculator service).
+
+## Suggested refactoring
+
+To improve the design, we could:
+
+* Introduce the notions of **Service** and **ServiceRegistry**. This would allow us to implement the behavior of every new protocol command in a separate class.
+
+* Split the codebase in two projects. The framework module would implement the generic behaviour, whereas the application module would implement the specific commands. The application module would have a dependency on the framework module.
+
+* This would illustrate the notion of **Inversion of Control (IoC) pattern**. When this pattern is applied, the developer is not invoking methods or functions provided by a **library**. Instead, the developer provides code that is invoked by a **framework**, when a certain event occurs.
+
+  ## 
 
