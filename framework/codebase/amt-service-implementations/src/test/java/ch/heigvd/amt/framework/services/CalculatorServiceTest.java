@@ -1,5 +1,6 @@
 package ch.heigvd.amt.framework.services;
 
+import ch.heigvd.amt.framework.api.ServiceTest;
 import ch.heigvd.amt.framework.exceptions.InvalidOperationException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +10,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CalculatorServiceTest extends ServiceTest{
+class CalculatorServiceTest extends ServiceTest {
 
   @BeforeEach
   void setupService() {

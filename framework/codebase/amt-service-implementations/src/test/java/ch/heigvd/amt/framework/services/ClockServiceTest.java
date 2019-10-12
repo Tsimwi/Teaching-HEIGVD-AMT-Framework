@@ -1,10 +1,10 @@
 package ch.heigvd.amt.framework.services;
 
+import ch.heigvd.amt.framework.api.ServiceTest;
 import ch.heigvd.amt.framework.exceptions.InvalidOperationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.net.ServerSocket;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

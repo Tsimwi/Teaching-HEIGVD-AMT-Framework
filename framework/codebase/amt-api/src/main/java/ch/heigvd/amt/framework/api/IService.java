@@ -7,5 +7,5 @@ import java.util.List;
 public interface IService {
 
   String execute(String operationName, List<String> parameterValues) throws InvalidOperationException;
-
+  String getHelpMessage();
 }

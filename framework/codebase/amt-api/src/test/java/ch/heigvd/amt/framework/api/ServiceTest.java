@@ -1,4 +1,4 @@
-package ch.heigvd.amt.framework.services;
+package ch.heigvd.amt.framework.api;
 
 import ch.heigvd.amt.framework.api.IService;
 import ch.heigvd.amt.framework.exceptions.InvalidOperationException;
@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class ServiceTest {
 
-  IService service;
+  public IService service;
 
   @Test
   void itShouldThrowAnExceptionIfOperationDoesNotExist() {
