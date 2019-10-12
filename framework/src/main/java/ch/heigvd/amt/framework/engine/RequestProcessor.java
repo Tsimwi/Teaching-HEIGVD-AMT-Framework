@@ -6,14 +6,8 @@ import ch.heigvd.amt.framework.exceptions.LookupException;
 import ch.heigvd.amt.framework.services.HealthCheckService;
 
 /**
- * The RequestProcessor is responsible to process requests sent by clients to the server. In this initial
- * implementation, the RequestProcessor tries to do everything himself.
- *
- * This raises 2 problems:
- *
- * 1) the class is going to become large and hard to maintain if we keep adding commands (long switch statement)
- * 2) we don't have a separation between "framework" and "application" commands: if we want to extend the behavior,
- *    we have to modify this class instead of adding new code outside
+ * The RequestProcessor is responsible to process requests sent by clients to the server. In this second
+ * implementation, the RequestProcessor delegates work to services, which it looks up in the service registry.
  */
 class RequestProcessor {
 

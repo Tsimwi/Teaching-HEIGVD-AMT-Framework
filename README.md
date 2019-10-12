@@ -52,34 +52,80 @@ C: calculatorService:add:12
 S: 4004:missing parameter
 ```
 
-## Design of the first implementation
+## Design of the second version (step-02-service-registry)
 
-Let's start with a minimal implementation that meets these requirements. We have decided to use 4 key classes: Server, RequestProcessor, Request and Response. The responsibilities of these classes are described in the class diagram:
+In the second implementation, we achieved a nice refactoring by introducing the notions of **Service** and **ServiceRegistry**. Instead of having a huge method in the **RequestProcessor** class. Instead of an ugly switch statement, we now have the following code:
 
-![./doc/figure-class-diagram.png](./doc/figure-class-diagram.png)
+```
+  void processRequest(Request request, Response response) throws InvalidOperationException {
+    ServiceRegistry registry = ServiceRegistry.getServiceRegistry();
+    try {
+      IService service = registry.lookup(request.getServiceName());
+      String returnValue = service.execute(request.getOperationName(), request.getParameterValues());
+      response.setStatusCode(0);
+      response.setValue(returnValue);
+    } catch (LookupException e) {
+      throw new InvalidOperationException(e.getMessage());
+    }
+  }
+```
+
+* From the request sent over TCP, we extract a service name, an operation name and a list of parameters (they are all String values)
+* We use the service name to look up a service in the registry. With this instance, we can now invoke the operation and pass the parameter values. We obtain a return value, which we feed into the protocol response.
+
+For this to work, we also have to register the services at startup:
+
+```
+  public static void main(String[] args) {
+    ServiceRegistry registry = ServiceRegistry.getServiceRegistry();
+    registry.register(HealthCheckService.SERVICE_NAME, new HealthCheckService());
+    registry.register(ClockService.SERVICE_NAME, new ClockService());
+    registry.register(CalculatorService.SERVICE_NAME, new CalculatorService());
+
+    Server server = new Server();
+    server.start();
+  }
+```
+
+And obviously to implement the services:
+
+```
+public class CalculatorService implements IService {
+  public static final String SERVICE_NAME = "calculatorService";
+  public static final String OPERATION_ADD = "add";
+  public static final String OPERATION_MULT = "mult";
+
+  @Override
+  public String execute(String operationName, List<String> parameterValues) throws InvalidOperationException {
+    switch (operationName) {
+      case OPERATION_ADD:
+        Integer p1 = Integer.parseInt(parameterValues.get(0));
+        Integer p2 = Integer.parseInt(parameterValues.get(1));
+        return Integer.toString(p1 + p2);
+      case OPERATION_MULT:
+        p1 = Integer.parseInt(parameterValues.get(0));
+        p2 = Integer.parseInt(parameterValues.get(1));
+        return Integer.toString(p1 * p2);
+      default:
+        throw new InvalidOperationException("Operation " + operationName + " is not valid.");
+    }
+  }
+}
+```
 
 
 
-The interactions between these classes are shown in the sequence diagram. When the Server has accepted a connection request, it starts reading lines from the socket. For each line, it creates a Request and an (empty) Response. It passes them to the RequestProcessor. The RequestProcessor reads data in the Request object and writes data in the Response object. When the RequestProcessor is done, the Server serializes the Response and writes the bytes on the socket, sending them to the client.
-
-![./doc/figure-class-diagram.png](./doc/figure-sequence-diagram.png)
-
-## Critique of this version (step-01-only-a-framework)
+## Critique of this version (step-02-service-registry)
 
 This version has a number of flaws:
 
-* The code is **not easy to extend**. If we define new commands, we have to modify the RequestProcessor. This class will quickly become long and hard to maintain when we add new commands.
-* We **do not have a clean separation** between the generic code (the classes that implement the core protocol) and the application-specific code (the commands that we add on top, such as the calculator service).
+* The code is **monolithic**. We have a single project, which contains everything. There is **no separation** between the **generic server behaviour** (accepting TCP connections, reading protocol commands, dispatching work) and the **specific behaviour of individual command handlers**.
+* It is not easy to ask **third-party developers** to extend the protocol and to provide additional command handlers. We **do not have any SDK** and they need to work in our codebase.
 
 ## Suggested refactoring
 
 To improve the design, we could:
 
-* Introduce the notions of **Service** and **ServiceRegistry**. This would allow us to implement the behavior of every new protocol command in a separate class.
-
-* Split the codebase in two projects. The framework module would implement the generic behaviour, whereas the application module would implement the specific commands. The application module would have a dependency on the framework module.
-
-* This would illustrate the notion of **Inversion of Control (IoC) pattern**. When this pattern is applied, the developer is not invoking methods or functions provided by a **library**. Instead, the developer provides code that is invoked by a **framework**, when a certain event occurs.
-
-  ## 
+* **Split the codebase into 3 parts**: i) the core server, ii) a library with interfaces that we provide to third-party developers (our SDK) and iii) the service implementations created by third-party developers.
+* Use the **Java reflection API** to dynamically instantiate and invoke classed provided by third-party developers.
 
