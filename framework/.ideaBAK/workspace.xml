@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7e561b9a-fa9b-49c8-8bd7-e8175eb615d8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../doc/diagrams.graffle/data.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../doc/diagrams.graffle/data.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework.iml" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/framework$HealthCheckServiceTest_shouldRefuseInvalidOperation.ic" NAME="HealthCheckServiceTest.shouldRefuseInvalidOperation Coverage Results" MODIFIED="1567954652790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>ch.heigvd.amt.framework.services.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/framework$All_in_framework.ic" NAME="All in framework Coverage Results" MODIFIED="1567954759566" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="152" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1RV651G4hvf6AfsYOJqOa2VzmfR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.annotationProcessors" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="ch.heigvd.amt.framework.services" />
+      <recent name="ch.heigvd.amt.framework.engine" />
+      <recent name="ch.heigvd.amt.framework.api" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="ch.heigvd.amt.framework.engine" />
+      <recent name="ch.heigvd.amt.framework.api" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ch.heigvd.amt.framework.services" />
+      <recent name="ch.heigvd.amt.framework.annotations" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="ch.heigvd.amt.framework.engine" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Run server">
+    <configuration name="Run server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ch.heigvd.amt.framework.engine.Server" />
+      <module name="framework" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in framework" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="framework" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalculatorServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="framework" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ch.heigvd.amt.framework.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ch.heigvd.amt.framework.services" />
+      <option name="MAIN_CLASS_NAME" value="ch.heigvd.amt.framework.services.CalculatorServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClockServiceTest.itShouldProvideAnAddOperation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="framework" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ch.heigvd.amt.framework.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ch.heigvd.amt.framework.services" />
+      <option name="MAIN_CLASS_NAME" value="ch.heigvd.amt.framework.services.ClockServiceTest" />
+      <option name="METHOD_NAME" value="itShouldProvideAnAddOperation" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HealthCheckServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="framework" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ch.heigvd.amt.framework.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ch.heigvd.amt.framework.services" />
+      <option name="MAIN_CLASS_NAME" value="ch.heigvd.amt.framework.services.HealthCheckServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RequestProcessorTest.processCalculatorServiceAddCommand" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="framework" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ch.heigvd.amt.framework.engine.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ch.heigvd.amt.framework.engine" />
+      <option name="MAIN_CLASS_NAME" value="ch.heigvd.amt.framework.engine.RequestProcessorTest" />
+      <option name="METHOD_NAME" value="processCalculatorServiceAddCommand" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Run server" />
+      <item itemvalue="JUnit.All in framework" />
+      <item itemvalue="JUnit.CalculatorServiceTest" />
+      <item itemvalue="JUnit.ClockServiceTest.itShouldProvideAnAddOperation" />
+      <item itemvalue="JUnit.HealthCheckServiceTest" />
+      <item itemvalue="JUnit.RequestProcessorTest.processCalculatorServiceAddCommand" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.RequestProcessorTest.processCalculatorServiceAddCommand" />
+        <item itemvalue="JUnit.HealthCheckServiceTest" />
+        <item itemvalue="JUnit.ClockServiceTest.itShouldProvideAnAddOperation" />
+        <item itemvalue="JUnit.CalculatorServiceTest" />
+        <item itemvalue="JUnit.All in framework" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",SHOW_INHERITED" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7e561b9a-fa9b-49c8-8bd7-e8175eb615d8" name="Default Changelist" comment="" />
+      <created>1567507647045</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1567507647045</updated>
+      <workItem from="1567507651109" duration="47329000" />
+      <workItem from="1568973742523" duration="1436000" />
+      <workItem from="1569739729618" duration="9893000" />
+      <workItem from="1569812249139" duration="6667000" />
+      <workItem from="1569834635543" duration="343000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="socket.getRemoteSocketAddress()" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>socket.getRemoteSocketAddress()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>result.getClass().getMethods()</expression-string>
+        <language-id>JAVA</language-id>
+        <custom-info>java.lang.reflect.Proxy,ch.heigvd.amt.framework.engine.ServicesRegistry,java.lang.reflect.InvocationHandler</custom-info>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>method.invoke(proxy)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>method</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>proxy</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>args</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>args[0]</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>method.invoke()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>((MyService) proxy).getName()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+</project>
