@@ -2,10 +2,9 @@ package ch.heigvd.amt.framework.engine;
 
 import ch.heigvd.amt.framework.exceptions.InvalidOperationException;
 import ch.heigvd.amt.framework.exceptions.InvalidRequestException;
-import ch.heigvd.amt.framework.services.CalculatorService;
-import ch.heigvd.amt.framework.services.ClockService;
 import ch.heigvd.amt.framework.services.HealthCheckService;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.regex.Matcher;
@@ -21,11 +20,12 @@ class RequestProcessorTest {
   static void registerServices() {
     ServiceRegistry registry = ServiceRegistry.getServiceRegistry();
     registry.register(HealthCheckService.SERVICE_NAME, new HealthCheckService());
-    registry.register(CalculatorService.SERVICE_NAME, new CalculatorService());
-    registry.register(ClockService.SERVICE_NAME, new ClockService());
+    // registry.register(CalculatorService.SERVICE_NAME, new CalculatorService());
+    // registry.register(ClockService.SERVICE_NAME, new ClockService());
   }
 
   @Test
+  @Disabled("The clock service has been removed from the core framework code")
   void processClockServiceGetCurrentDateCommand() throws InvalidRequestException, InvalidOperationException {
     String command = "clockService:getCurrentDate";
     Request request = new Request();
@@ -40,6 +40,7 @@ class RequestProcessorTest {
   }
 
   @Test
+  @Disabled("The calculator service has been removed from the core framework code")
   void processCalculatorServiceAddCommand() throws InvalidRequestException, InvalidOperationException {
     String command = "calculatorService:add:3:5";
     Request request = new Request();
@@ -51,6 +52,7 @@ class RequestProcessorTest {
   }
 
   @Test
+  @Disabled("The calculator service has been removed from the core framework code")
   void processCalculatorServiceMultCommand() throws InvalidRequestException, InvalidOperationException {
     String command = "calculatorService:mult:3:5";
     Request request = new Request();

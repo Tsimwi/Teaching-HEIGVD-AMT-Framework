@@ -1,7 +1,5 @@
 package ch.heigvd.amt.framework.engine;
 
-import ch.heigvd.amt.framework.services.CalculatorService;
-import ch.heigvd.amt.framework.services.ClockService;
 import ch.heigvd.amt.framework.services.HealthCheckService;
 
 import java.io.*;
@@ -126,8 +124,8 @@ public class Server {
   public static void main(String[] args) {
     ServiceRegistry registry = ServiceRegistry.getServiceRegistry();
     registry.register(HealthCheckService.SERVICE_NAME, new HealthCheckService());
-    registry.register(ClockService.SERVICE_NAME, new ClockService());
-    registry.register(CalculatorService.SERVICE_NAME, new CalculatorService());
+    // registry.register(ClockService.SERVICE_NAME, new ClockService());
+    // registry.register(CalculatorService.SERVICE_NAME, new CalculatorService());
 
     Server server = new Server();
     server.start();
