@@ -1,13 +1,22 @@
 package ch.heigvd.amt.framework.services;
 
+import ch.heigvd.amt.framework.api.ServiceTest;
 import ch.heigvd.amt.framework.exceptions.InvalidOperationException;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class HealthCheckServiceTest {
+class HealthCheckServiceTest extends ServiceTest {
+
+  @BeforeEach
+  void setupService() {
+    service = new HealthCheckService();
+  }
+
 
   @Test
   void itShouldProvideAPingOperation() throws InvalidOperationException {

@@ -20,47 +20,6 @@ class RequestProcessorTest {
   static void registerServices() {
     ServiceRegistry registry = ServiceRegistry.getServiceRegistry();
     registry.register(HealthCheckService.SERVICE_NAME, new HealthCheckService());
-    // registry.register(CalculatorService.SERVICE_NAME, new CalculatorService());
-    // registry.register(ClockService.SERVICE_NAME, new ClockService());
-  }
-
-  @Test
-  @Disabled("The clock service has been removed from the core framework code")
-  void processClockServiceGetCurrentDateCommand() throws InvalidRequestException, InvalidOperationException {
-    String command = "clockService:getCurrentDate";
-    Request request = new Request();
-    request.deserialize(command);
-    Response response = new Response();
-    requestProcessor.processRequest(request, response);
-    String value = response.getValue();
-    Pattern p = Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}");
-    Matcher m = p.matcher(value);
-    assertEquals(0,response.getStatusCode());
-    assertTrue(m.matches());
-  }
-
-  @Test
-  @Disabled("The calculator service has been removed from the core framework code")
-  void processCalculatorServiceAddCommand() throws InvalidRequestException, InvalidOperationException {
-    String command = "calculatorService:add:3:5";
-    Request request = new Request();
-    request.deserialize(command);
-    Response response = new Response();
-    requestProcessor.processRequest(request, response);
-    assertEquals(0,response.getStatusCode());
-    assertEquals("8", response.getValue());
-  }
-
-  @Test
-  @Disabled("The calculator service has been removed from the core framework code")
-  void processCalculatorServiceMultCommand() throws InvalidRequestException, InvalidOperationException {
-    String command = "calculatorService:mult:3:5";
-    Request request = new Request();
-    request.deserialize(command);
-    Response response = new Response();
-    requestProcessor.processRequest(request, response);
-    assertEquals(0,response.getStatusCode());
-    assertEquals("15", response.getValue());
   }
 
   @Test
@@ -85,4 +44,13 @@ class RequestProcessorTest {
     assertNotEquals(0, Long.parseLong(response.getValue()));
   }
 
+  @Test
+  void processHelpCommand() throws InvalidRequestException, InvalidOperationException {
+    String command = "help:all";
+    Request request = new Request();
+    request.deserialize(command);
+    Response response = new Response();
+    requestProcessor.processRequest(request, response);
+    assertEquals(0,response.getStatusCode());
+  }
 }

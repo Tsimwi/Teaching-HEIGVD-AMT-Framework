@@ -10,9 +10,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class ServerTest {
 
   @Test
-  void itShouldBePossibleToStartAndStopServer() {
+  void itShouldBePossibleToStartAndStopServer() throws IOException {
     Server theServer = Server.getServer();
+    System.out.println("Starting server");
     theServer.start();
+    System.out.println("Server has started");
     assertTrue(theServer.isRunning());
     theServer.stop();
     assertFalse(theServer.isRunning());

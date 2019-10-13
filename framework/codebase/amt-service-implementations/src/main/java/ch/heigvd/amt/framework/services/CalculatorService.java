@@ -25,4 +25,11 @@ public class CalculatorService implements IService {
         throw new InvalidOperationException("Operation " + operationName + " is not valid.");
     }
   }
+
+  @Override
+  public String getHelpMessage() {
+    return "service: " + this.getClass().getCanonicalName() + "\r\n"
+      + " operation: " + OPERATION_ADD + " (Integer v1, Integer v2)\r\n"
+      + " operation: " + OPERATION_MULT + " (Integer v1, Integer v2)";
+  }
 }

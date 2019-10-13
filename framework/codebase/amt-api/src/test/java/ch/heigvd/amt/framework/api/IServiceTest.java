@@ -42,11 +42,4 @@ class IServiceTest extends ServiceTest {
     });
   }
 
-  @Test
-  void aServiceShouldProvideAHelpMessage() {
-    String helpMessage = service.getHelpMessage();
-    assertNotNull(helpMessage);
-    assertNotEquals("", helpMessage);
-  }
-
 }

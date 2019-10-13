@@ -1,8 +1,12 @@
 package ch.heigvd.amt.framework.engine;
 
+import ch.heigvd.amt.framework.api.IService;
+import ch.heigvd.amt.framework.services.CalculatorService;
+import ch.heigvd.amt.framework.services.ClockService;
 import ch.heigvd.amt.framework.services.HealthCheckService;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.CountDownLatch;
@@ -35,24 +39,27 @@ public class Server {
   ServerSocket serverSocket;
 
   private static Server singleton = new Server();
+
   private Server() {
   }
+
   public static Server getServer() {
     return singleton;
   }
 
-  public void start() {
+  public void start() throws IOException {
     startSignal = new CountDownLatch(1);
     shouldRun = true;
+
+    serverSocket = new ServerSocket(PORT);
+    startTime = System.currentTimeMillis();
+    startSignal.countDown();
 
     Thread acceptThread = new Thread(new Runnable() {
       @Override
       public void run() {
-        try {
-          serverSocket = new ServerSocket(PORT);
-          startSignal.countDown();
-          startTime = System.currentTimeMillis();
-          while (shouldRun) {
+        while (shouldRun) {
+          try {
             Socket socket = serverSocket.accept();
             executorService.submit(() -> {
               try {
@@ -61,12 +68,11 @@ public class Server {
                 e.printStackTrace();
               }
             });
+          } catch (IOException e) {
+            e.printStackTrace();
           }
-        } catch (IOException e) {
-          startSignal.countDown();
         }
         stopSignal.countDown();
-
       }
     });
     acceptThread.start();
@@ -78,14 +84,19 @@ public class Server {
   }
 
   public void stop() {
+    System.out.println("prep stop signal");
     stopSignal = new CountDownLatch(1);
+    System.out.println(stopSignal);
     shouldRun = false;
     try {
-      serverSocket.close();
+      if (serverSocket != null) {
+        serverSocket.close();
+      }
     } catch (IOException e) {
       e.printStackTrace();
     }
     try {
+      System.out.println("await on stop signal");
       stopSignal.await();
     } catch (InterruptedException e) {
       e.printStackTrace();
@@ -121,11 +132,15 @@ public class Server {
     return System.currentTimeMillis() - startTime;
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, IOException {
     ServiceRegistry registry = ServiceRegistry.getServiceRegistry();
-    registry.register(HealthCheckService.SERVICE_NAME, new HealthCheckService());
-    // registry.register(ClockService.SERVICE_NAME, new ClockService());
-    // registry.register(CalculatorService.SERVICE_NAME, new CalculatorService());
+    registry.register(HealthCheckService.class.getCanonicalName(), new HealthCheckService());
+
+    IService service = ((IService) Class.forName("ch.heigvd.amt.framework.services.ClockService").getDeclaredConstructor().newInstance());
+    registry.register(service.getClass().getCanonicalName(), service);
+
+    service = ((IService) Class.forName("ch.heigvd.amt.framework.services.CalculatorService").getDeclaredConstructor().newInstance());
+    registry.register(service.getClass().getCanonicalName(), service);
 
     Server server = new Server();
     server.start();

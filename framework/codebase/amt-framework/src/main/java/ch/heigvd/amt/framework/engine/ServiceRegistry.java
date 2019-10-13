@@ -3,8 +3,11 @@ package ch.heigvd.amt.framework.engine;
 import ch.heigvd.amt.framework.api.IService;
 import ch.heigvd.amt.framework.exceptions.LookupException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ServiceRegistry {
 
@@ -28,4 +31,8 @@ public class ServiceRegistry {
     return candidate;
   }
 
+  public List<IService> getServices() {
+    List<IService> services = registry.values().stream().collect(Collectors.toList());
+    return services;
+  }
 }

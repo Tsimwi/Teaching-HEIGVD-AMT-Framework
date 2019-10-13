@@ -23,4 +23,12 @@ public class HealthCheckService implements IService {
         throw new InvalidOperationException("Operation " + operationName + " is not valid.");
     }
   }
+
+  @Override
+  public String getHelpMessage() {
+    return "service: " + this.getClass().getCanonicalName() + "\r\n"
+      + " operation: " + OPERATION_PING + " (no arguments)\r\n"
+      + " operation: " + OPERATION_UPTIME + " (no arguments)";
+  }
+
 }

@@ -18,4 +18,10 @@ public class ClockService implements IService {
         throw new InvalidOperationException("Operation " + operationName + " is not valid.");
     }
   }
+
+  @Override
+  public String getHelpMessage() {
+    return "service: " + this.getClass().getCanonicalName() + "\r\n"
+      + " operation: " + OPERATION_GET_DATE + " (no arg)";
+  }
 }

@@ -13,6 +13,20 @@ class RequestProcessor {
   void processRequest(Request request, Response response) throws InvalidOperationException {
 
     ServiceRegistry registry = ServiceRegistry.getServiceRegistry();
+
+    if ("help".equalsIgnoreCase(request.getServiceName())) {
+      response.setStatusCode(0);
+      StringBuilder sb = new StringBuilder("*** HELP FOR REGISTERED SERVICES ***\r\n\r\n");
+      registry.getServices().forEach(iService -> {
+        sb.append(iService.getHelpMessage());
+        sb.append("\r\n");
+        sb.append("\r\n");
+      });
+
+      response.setValue(sb.toString());
+      return;
+    }
+
     try {
       IService service = registry.lookup(request.getServiceName());
       String returnValue = service.execute(request.getOperationName(), request.getParameterValues());

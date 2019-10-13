@@ -20,6 +20,11 @@ class ServiceRegistryTest {
       public String execute(String operationName, List<String> parameterValues) throws InvalidOperationException {
         return null;
       }
+
+      @Override
+      public String getHelpMessage() {
+        return null;
+      }
     };
     registry.register("myService", service);
     IService lookup = registry.lookup("myService");
@@ -32,5 +37,22 @@ class ServiceRegistryTest {
     Assertions.assertThrows(LookupException.class, () -> {
       registry.lookup("nameOfAServiceThatWasNeverRegistered");
     });
+  }
+
+  @Test
+  void itShouldMakeTheListOfServicesAvailable() {
+    ServiceRegistry registry = new ServiceRegistry();
+    registry.register("hello", new IService() {
+      @Override
+      public String execute(String operationName, List<String> parameterValues) throws InvalidOperationException {
+        return null;
+      }
+
+      @Override
+      public String getHelpMessage() {
+        return null;
+      }
+    });
+    assertEquals(1, registry.getServices().size());
   }
 }
