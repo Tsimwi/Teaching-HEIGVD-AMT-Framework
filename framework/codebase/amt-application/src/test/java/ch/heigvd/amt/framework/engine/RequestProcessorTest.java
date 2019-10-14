@@ -1,5 +1,6 @@
 package ch.heigvd.amt.framework.engine;
 
+import ch.heigvd.amt.framework.api.IService;
 import ch.heigvd.amt.framework.exceptions.InvalidOperationException;
 import ch.heigvd.amt.framework.exceptions.InvalidRequestException;
 import ch.heigvd.amt.framework.services.CalculatorService;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,10 +21,13 @@ class RequestProcessorTest {
   RequestProcessor requestProcessor = new RequestProcessor();
 
   @BeforeAll
-  static void registerServices() {
+  static void registerServices() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
     ServiceRegistry registry = ServiceRegistry.getServiceRegistry();
     registry.register(CalculatorService.SERVICE_NAME, new CalculatorService());
     registry.register(ClockService.SERVICE_NAME, new ClockService());
+
+    // IService jokesService = (IService) Class.forName("com.wasabi.amt.services.JokesService").getConstructor().newInstance();
+    /// registry.register("jokesService", jokesService);
   }
 
   @Test
@@ -59,6 +64,18 @@ class RequestProcessorTest {
     requestProcessor.processRequest(request, response);
     assertEquals(0,response.getStatusCode());
     assertEquals("15", response.getValue());
+  }
+
+  @Test
+  @Disabled
+  void processJokesServiceTellJokeCommand() throws InvalidRequestException, InvalidOperationException {
+    String command = "jokesService:tellJoke";
+    Request request = new Request();
+    request.deserialize(command);
+    Response response = new Response();
+    requestProcessor.processRequest(request, response);
+    assertEquals(0,response.getStatusCode());
+    assertNotNull(response.getValue());
   }
 
 }

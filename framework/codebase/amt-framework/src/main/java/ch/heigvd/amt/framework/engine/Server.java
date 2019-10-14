@@ -142,6 +142,9 @@ public class Server {
     service = ((IService) Class.forName("ch.heigvd.amt.framework.services.CalculatorService").getDeclaredConstructor().newInstance());
     registry.register(service.getClass().getCanonicalName(), service);
 
+    service = ((IService) Class.forName("com.wasabi.amt.services.JokesService").getDeclaredConstructor().newInstance());
+    registry.register(service.getClass().getCanonicalName(), service);
+
     Server server = new Server();
     server.start();
   }
